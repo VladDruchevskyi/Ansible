@@ -34,11 +34,11 @@
     - "{{ encrypted_user_password.results }}"
   when: user_created.changed
 
-- name: Force user to change the password at first login
-  shell: chage -d 0 "{{ item }}"
-  with_items:
-    - "{{ users }}"
-  when: user_created.changed
+#- name: Force user to change the password at first login
+#  shell: chage -d 0 "{{ item }}"
+#  with_items:
+#    - "{{ users }}"
+#  when: user_created.changed
 
 - name: Save Passwords Locally
   become: no
