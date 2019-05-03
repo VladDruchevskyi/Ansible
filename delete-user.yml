@@ -1,0 +1,15 @@
+---
+# Delete user playbook
+
+- hosts: test
+  become: True
+  user: admin
+  vars:
+#Delete following user
+  tasks:
+  - name: Delete the existing user
+  user:
+  name: test24
+  state: absent
+  remove: yes
+  shell: /bin/bash
