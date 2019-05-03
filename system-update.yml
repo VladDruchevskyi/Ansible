@@ -1,4 +1,5 @@
 ---
+# System update & reboot playbook
 - hosts: test
   tasks:
   - name: Update OS
