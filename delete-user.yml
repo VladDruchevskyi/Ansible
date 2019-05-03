@@ -9,7 +9,7 @@
   tasks:
   - name: Delete the existing user
   user:
-  name: test24
-  state: absent
-  remove: yes
-  shell: /bin/bash
+   name: test24
+   state: absent
+   remove: yes
+   shell: /bin/bash
