@@ -5,25 +5,25 @@
   local_action: shell pwgen -s -N 1 12
   register: user_password
   with_items: "{{ users }}"
-  run_once: true
+  run_once: false
 
 - name: Generate encrypted password
   local_action: shell python -c 'import crypt; print(crypt.crypt( "{{ item.stdout }}", crypt.mksalt(crypt.METHOD_SHA512)))'
   register: encrypted_user_password
   with_items: "{{ user_password.results }}"
-  run_once: true
+  run_once: false
 
-- name: Create new user with group
-  user:
-    name: "{{ item }}"
-    groups: "{{ group }}"
-    shell: /bin/bash
-    append: yes
-    createhome: yes
-    comment: 'Created with ansible'
-  with_items:
-    - "{{ users }}"
-  register: user_created
+#- name: Create new user with group
+#  user:
+#    name: "{{ item }}"
+#    groups: "{{ group }}"
+#    shell: /bin/bash
+#    append: yes
+#    createhome: yes
+#    comment: 'Created with ansible'
+#  with_items:
+#    - "{{ users }}"
+#  register: user_created
 
 - name: Update user Passwords
   user:
