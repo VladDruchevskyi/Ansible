@@ -44,4 +44,4 @@
   become: no
   local_action: copy content={{ item.stdout }} dest=./{{ item.item }}.txt
   with_items: "{{ user_password.results }}"
-when: user_created.changed
+  when: user_created.changed
