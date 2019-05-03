@@ -1,5 +1,5 @@
 ---
-# Create user with groups and with random password, force password change with first login.
+# Change user password
 
 - name: Generate password for new user
   local_action: shell pwgen -s -N 1 12
@@ -13,18 +13,6 @@
   with_items: "{{ user_password.results }}"
   run_once: false
 
-#- name: Create new user with group
-#  user:
-#    name: "{{ item }}"
-#    groups: "{{ group }}"
-#    shell: /bin/bash
-#    append: yes
-#    createhome: yes
-#    comment: 'Created with ansible'
-#  with_items:
-#    - "{{ users }}"
-#  register: user_created
-
 - name: Update user Passwords
   user:
     name: '{{ item.0 }}'
@@ -32,16 +20,8 @@
   with_together:
     - "{{ users }}"
     - "{{ encrypted_user_password.results }}"
-  when: user_created.changed
-
-#- name: Force user to change the password at first login
-#  shell: chage -d 0 "{{ item }}"
-#  with_items:
-#    - "{{ users }}"
-#  when: user_created.changed
 
 - name: Save Passwords Locally
   become: no
   local_action: copy content={{ item.stdout }} dest=./{{ item.item }}.txt
   with_items: "{{ user_password.results }}"
-  when: user_created.changed
