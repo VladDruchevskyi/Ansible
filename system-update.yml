@@ -1,0 +1,11 @@
+---
+- hosts: test
+  tasks:
+  - name: Update OS
+    yum:
+      name="*" state=latest
+
+  - name: restart system to reboot to apply updates
+    shell: "sleep 5 && reboot"
+    async: 1
+    poll: 0
