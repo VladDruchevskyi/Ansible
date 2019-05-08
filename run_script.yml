@@ -1,6 +1,6 @@
 ---
 - name: Transfer and execute a script.
-  hosts: server
+  hosts: test
   user: test_user
   sudo: yes
   tasks:
