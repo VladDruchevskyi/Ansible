@@ -5,7 +5,7 @@
   #sudo: yes
   tasks:
      - name: Transfer the script
-       copy: src=test.sh dest=/root mode=0777
+       copy: src=test.sh dest=/root mode=0744
 
      - name: Execute the script
-       command: bash /home/test_user/test.sh
+       command: bash /root/test.sh
